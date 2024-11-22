@@ -46,7 +46,7 @@ const PostCard = (props: PostCardProps) => {
       <h2 className="font-bold text-lg ">{author}</h2>
       <p className="my-2">{content}</p>
       <img
-        src={image ?? NO_IMAGE_URL}
+        src={image || NO_IMAGE_URL}
         alt="Post"
         className="w-full h-96 object-cover mb-2 rounded"
         onError={onImageNotFound}
@@ -54,6 +54,7 @@ const PostCard = (props: PostCardProps) => {
       <div className="flex flex-row justify-between" >
         <button
           onClick={() => toggleLike(id)}
+          data-testid={`test-like-${id}`}
           className={`px-4 py-2 rounded ${liked ? "bg-red-500 text-white" : "bg-gray-200 dark:bg-gray-700"
             }`}
         >
@@ -65,6 +66,7 @@ const PostCard = (props: PostCardProps) => {
             if (!saved)
               showToast(`Bookmarked ${author}'s post`)
           }}
+          data-testid={`test-save-${id}`}
           className={`px-4 py-2 rounded ${saved ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"
             }`}
         >

@@ -3,7 +3,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 type Toast = { id: number, message: string }
 const ToastsContext = createContext<{ toasts: Toast[], showToast: (v: string) => void }>({
   toasts: [],
-  showToast: (m: string) => { }
+  showToast: (m: string) => { console.log(m); }
 })
 
 export function useToaster(){
