@@ -3,11 +3,6 @@ import '@testing-library/jest-dom'
 import PostCard from "../src/components/PostCard"
 import Feed from '../src/components/Feed'
 
-beforeAll(() => {})
-afterEach(() => {
-  
-})
-afterAll(() => {})
 
 test('should show data', async () => {
   render(<PostCard id={34} author='some' liked={false} content='text' image='' />)
