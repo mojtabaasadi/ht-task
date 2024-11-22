@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Feed from "./components/Feed";
 import { BrowserRouter, Routes, Route } from "react-router";
 import Bookmarks from "./components/Bookmark";
+import "./App.css"
 
 const App: React.FC = () => {
   return (
