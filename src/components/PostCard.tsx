@@ -29,8 +29,8 @@ const PostCard = (props:PostCardProps) => {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-md shadow-md p-4 mb-4 ">
-       <h2 className="font-bold text-lg">{author}</h2>
+    <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded-md shadow-md p-4 mb-4 sm:w-[49%] lg:w-[32%] w-full">
+       <h2 className="font-bold text-lg ">{author}</h2>
         <p className="my-2">{content}</p>
         <img
           src={image ?? NO_IMAGE_URL}
