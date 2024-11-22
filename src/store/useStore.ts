@@ -1,5 +1,7 @@
 // src/store/useStore.ts
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
+import { persist, createJSONStorage } from 'zustand/middleware'
+
 
 interface Post {
   id: number;
@@ -11,10 +13,12 @@ interface Post {
 
 interface StoreState {
   posts: Post[];
+  bookmarks: number[];
   toggleLike: (id: number) => void;
+  toggleSave: (id: number) => void;
 }
 
-const useStore = create<StoreState>((set) => ({
+const creator:StateCreator<StoreState> = (set) => ({
   posts: [
     {
       id: 1,
@@ -157,12 +161,23 @@ const useStore = create<StoreState>((set) => ({
       liked: false
     }
   ],
+  bookmarks:[],
   toggleLike: (id: number) =>
-    set((state) => ({
+    set((state:StoreState) => ({
       posts: state.posts.map((post) =>
         post.id === id ? { ...post, liked: !post.liked } : post
       )
-    }))
+    })),
+  toggleSave:(id:number)=>set((state:StoreState) => ({
+    bookmarks: state.bookmarks.includes(id)?
+    state.bookmarks.filter(postId => postId!==id):[...new Set(state.bookmarks.concat(id))]
+  })),
+  
+})
+
+const useStore = create(persist<StoreState>(creator, {
+  name: 'my-storage', 
+  storage: createJSONStorage(() => localStorage), 
 }));
 
 export default useStore;

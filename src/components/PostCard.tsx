@@ -1,4 +1,4 @@
-import React,{ memo, SyntheticEvent } from "react";
+import React,{ memo, SyntheticEvent, useId } from "react";
 import useStore from "../store/useStore";
 const NO_IMAGE_URL = "https://placehold.co/600x600?text=No+Image"
 interface PostCardProps {
@@ -18,6 +18,10 @@ const PostCard = (props:PostCardProps) => {
     liked
   } = props
   const toggleLike = useStore((state) => state.toggleLike);
+  const toggleSave = useStore((state) => state.toggleSave);
+  const saved = useStore((state) => state.bookmarks.includes(id));
+  
+  
   const onImageNotFound = (e:SyntheticEvent<HTMLImageElement>)=>{
     if(e.currentTarget.src !== NO_IMAGE_URL){
       e.currentTarget.src = NO_IMAGE_URL
@@ -34,15 +38,24 @@ const PostCard = (props:PostCardProps) => {
           className="w-full h-96 object-cover mb-2 rounded"
           onError={onImageNotFound} 
           />
-
-      <button
-        onClick={() => toggleLike(id)}
-        className={`px-4 py-2 rounded ${
-          liked ? "bg-red-500 text-white" : "bg-gray-200 dark:bg-gray-700"
-        }`}
-      >
-        {liked ? "Unlike" : "Like"}
-      </button>
+      <div className="flex flex-row justify-between" >
+        <button
+          onClick={() => toggleLike(id)}
+          className={`px-4 py-2 rounded ${
+            liked ? "bg-red-500 text-white" : "bg-gray-200 dark:bg-gray-700"
+          }`}
+          >
+          {liked ? "Unlike" : "Like"}
+        </button>
+        <button
+          onClick={() => toggleSave(id)}
+          className={`px-4 py-2 rounded ${
+            saved ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"
+          }`}
+          >
+          {saved ? "Unsave" : "Save"}
+        </button>
+        </div>
     </div>
   );
 };

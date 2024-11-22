@@ -1,4 +1,4 @@
-import React,{  useMemo } from "react";
+import React,{  useId, useMemo } from "react";
 import PostCard from "./PostCard";
 import useStore from "../store/useStore";
 
@@ -9,7 +9,7 @@ const Feed: React.FC = () => {
     return posts.length
   },[posts])
   
-
+  
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl text-gray-900 dark:text-gray-200 font-bold mb-4 ">Posts ({postCount})</h1>{" "}

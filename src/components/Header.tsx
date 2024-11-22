@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 const Header: React.FC = () => {
   const storedDarkMode = localStorage.getItem('darkMode')
   const [isDarkMode, setIsDarkMode] = useState<boolean>(storedDarkMode === 'true');
-
+  
   useEffect(() => {
+    
     const html = document.documentElement
     if(storedDarkMode === 'true' && !html.classList.contains('dark')){
       document.documentElement.classList.add("dark");
     }
-  },[])
+  })
 
   const toggleDarkMode = (newVal:boolean) => {
     if (newVal) {
