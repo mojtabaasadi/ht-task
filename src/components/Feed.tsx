@@ -1,6 +1,7 @@
 import React from "react";
 import PostCard from "./PostCard";
 import useStore from "../store/useStore";
+import Toaster from "./Toasts";
 
 const Feed: React.FC = () => {
   const posts = useStore((state) => state.posts);
@@ -10,6 +11,7 @@ const Feed: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl text-gray-900 dark:text-gray-200 font-bold mb-4 ">Posts ({posts.length})</h1>
       <div className=" flex gap-2 flex-row flex-wrap">
+        <Toaster>
         {posts.map((post) => (
           <PostCard
             key={`feed-post-${post.id}`}
@@ -20,6 +22,7 @@ const Feed: React.FC = () => {
             liked={post.liked}
           />
         ))}
+        </Toaster>
       </div>
     </div>
   );
